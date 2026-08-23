@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LedClockControlLib/LedClockControlLib.csproj" />
+  <Project Path="Demo_LedClockControl/Demo_LedClockControl.csproj" DefaultStartup="true" />
+</Solution>
