@@ -6,17 +6,16 @@ WPF custom control built **entirely in C#** with WPFX.
 
 A 7-segment LED clock custom control.
 
-#### Properties -> DependencyProperty
+### Properties
 
 - `Timestamp` (`DateTime`)
 - `IsSecondsColonFlashEnabled` (`bool`)
 - `IsMinutesColonFlashEnabled` (`bool`)
 - `IsGlowEffectEnabled` (`bool`)
 
-#### Events -> RoutedEvent
+### Events
 
 - `TimestampChanged`
-
 
 ### Example demo app
 

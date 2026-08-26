@@ -1,6 +1,6 @@
-﻿namespace LedClockControlLib.Models;
+﻿namespace WpfxCustomControls;
 
-public enum LedSegment
+internal enum LedSegment
 {
     A = 0,
     B,

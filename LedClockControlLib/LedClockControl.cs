@@ -1,7 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using WpfxCustomControls.Styles;
 
 namespace WpfxCustomControls;
 

@@ -3,7 +3,9 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-public sealed class ColonEffectConverter : IMultiValueConverter
+namespace WpfxCustomControls;
+
+internal sealed class ColonEffectConverter : IMultiValueConverter
 {
     public static readonly Effect SecondsColonEffect = new DropShadowEffect
     {

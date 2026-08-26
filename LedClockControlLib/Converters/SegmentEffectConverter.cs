@@ -1,12 +1,11 @@
-﻿using LedClockControlLib.Models;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace LedClockControlLib.Converters;
+namespace WpfxCustomControls;
 
-public sealed class SegmentEffectConverter : IMultiValueConverter
+internal sealed class SegmentEffectConverter : IMultiValueConverter
 {
     public static readonly Effect SecondsEffect = new DropShadowEffect
     {

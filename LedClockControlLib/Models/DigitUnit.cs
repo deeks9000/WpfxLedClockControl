@@ -1,6 +1,6 @@
-﻿namespace LedClockControlLib.Models;
+﻿namespace WpfxCustomControls;
 
-public enum DigitUnit
+internal enum DigitUnit
 {
     OneSeconds = 0,
     TenSeconds,

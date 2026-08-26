@@ -1,6 +1,6 @@
-﻿namespace LedClockControlLib.Models;
+﻿namespace WpfxCustomControls;
 
-public sealed class SegmentModel
+internal sealed class SegmentModel
 {
     // 5 x 9 seven-segment layout:
     //

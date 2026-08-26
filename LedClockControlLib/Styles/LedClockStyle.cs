@@ -1,15 +1,12 @@
-﻿using LedClockControlLib.Converters;
-using LedClockControlLib.Models;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using WpfxCustomControls.Converters;
 
-namespace WpfxCustomControls.Styles;
+namespace WpfxCustomControls;
 
-public static class LedClockStyle
+internal static class LedClockStyle
 {
     private const int PixelSize = 10;
 

@@ -2,9 +2,9 @@
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace WpfxCustomControls.Converters;
+namespace WpfxCustomControls;
 
-public class ColonFillConverter : IValueConverter
+internal class ColonFillConverter : IValueConverter
 {
     public static readonly Brush ColonOffBrush = new SolidColorBrush(Color.FromArgb(32, 150, 150, 150));   // Small Alpha means MORE transparent!
 
