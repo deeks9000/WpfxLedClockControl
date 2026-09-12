@@ -29,8 +29,8 @@ internal sealed class SegmentEffectConverter : IMultiValueConverter
         if (values.Length < 2 || values[0] is not true)
             return null;
 
-        // [1] Timestamp
-        if (values[1] is not DateTime timestamp)
+        // [1] LedDigits
+        if (values[1] is not byte[] ledDigits)
             return null;
 
         // Static template metadata
@@ -38,7 +38,11 @@ internal sealed class SegmentEffectConverter : IMultiValueConverter
             return null;
 
         // No lit segment = no glow
-        if (!segmentModel.IsSegmentLit(timestamp))
+        byte digitMask = ledDigits[(int)segmentModel.Unit];
+
+        bool isLit = (digitMask & segmentModel.SegmentMask) != 0;
+
+        if (!isLit) 
             return null;
 
         return segmentModel.IsSeconds()
