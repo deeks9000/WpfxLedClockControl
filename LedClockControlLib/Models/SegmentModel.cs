@@ -5,14 +5,14 @@ internal sealed class SegmentModel
     public SegmentModel(DigitUnit unit, LedSegment segment)
     {
         Unit = unit;
-        SegmentMask = GetSegmentBit(segment);
+        SegmentBitMask = GetSegmentBitMask(segment);
     }
 
     public DigitUnit Unit { get; }
 
-    public byte SegmentMask { get; }
+    public byte SegmentBitMask { get; }
 
-    private byte GetSegmentBit(LedSegment segment) => segment switch
+    private byte GetSegmentBitMask(LedSegment segment) => segment switch
     {
         LedSegment.A => 1 << 0,
         LedSegment.B => 1 << 1,

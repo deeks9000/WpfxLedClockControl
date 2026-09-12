@@ -21,9 +21,9 @@ internal class SegmentBrushConverter : IValueConverter
         if (parameter is not SegmentModel segmentModel)
             return SegmentOffBrush;
 
-        byte digitMask = ledDigits[(int)segmentModel.Unit];
+        byte digitBitMask = ledDigits[(int)segmentModel.Unit];
 
-        bool isLit = (digitMask & segmentModel.SegmentMask) != 0;
+        bool isLit = (digitBitMask & segmentModel.SegmentBitMask) != 0;
 
         if (!isLit)
             return SegmentOffBrush;

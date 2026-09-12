@@ -1,4 +1,4 @@
-﻿namespace LedClockControlLib.Models;
+﻿namespace WpfxCustomControls;
 
 internal static class LedDigitsComputer
 {
@@ -14,7 +14,7 @@ internal static class LedDigitsComputer
     // E   C
     //  DDD
 
-    private static readonly byte[] DigitMasks = [
+    private static readonly byte[] DigitBitMasks = [
         0b0111111, // 0 = ABCDEF
         0b0000110, // 1 = BC
         0b1011011, // 2 = ABDEG
@@ -29,11 +29,11 @@ internal static class LedDigitsComputer
 
     public static void UpdateLedDigits(DateTime timestamp, byte[] ledDigits)
     {
-        ledDigits[5] = DigitMasks[timestamp.Hour / 10];
-        ledDigits[4] = DigitMasks[timestamp.Hour % 10];
-        ledDigits[3] = DigitMasks[timestamp.Minute / 10];
-        ledDigits[2] = DigitMasks[timestamp.Minute % 10];
-        ledDigits[1] = DigitMasks[timestamp.Second / 10];
-        ledDigits[0] = DigitMasks[timestamp.Second % 10];
+        ledDigits[5] = DigitBitMasks[timestamp.Hour / 10];
+        ledDigits[4] = DigitBitMasks[timestamp.Hour % 10];
+        ledDigits[3] = DigitBitMasks[timestamp.Minute / 10];
+        ledDigits[2] = DigitBitMasks[timestamp.Minute % 10];
+        ledDigits[1] = DigitBitMasks[timestamp.Second / 10];
+        ledDigits[0] = DigitBitMasks[timestamp.Second % 10];
     }
 }
