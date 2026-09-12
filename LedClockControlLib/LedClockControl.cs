@@ -10,9 +10,9 @@ public class LedClockControl : Control, INotifyPropertyChanged
 {
     private readonly DispatcherTimer _timer = new DispatcherTimer();
     private readonly DispatcherTimer _flashTimer = new DispatcherTimer();
+    private byte[] _ledDigits = new byte[6];
     private bool _secondsColonActive = false;
     private bool _minutesColonActive = false;
-    private byte[] _ledDigits = new byte[6];
 
     public static Style DefaultStyle { get; }
 

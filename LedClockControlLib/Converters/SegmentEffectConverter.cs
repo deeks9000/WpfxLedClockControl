@@ -38,9 +38,9 @@ internal sealed class SegmentEffectConverter : IMultiValueConverter
             return null;
 
         // No lit segment = no glow
-        byte digitMask = ledDigits[(int)segmentModel.Unit];
+        byte digitBitMask = ledDigits[(int)segmentModel.Unit];
 
-        bool isLit = (digitMask & segmentModel.SegmentBitMask) != 0;
+        bool isLit = (digitBitMask & segmentModel.SegmentBitMask) != 0;
 
         if (!isLit) 
             return null;

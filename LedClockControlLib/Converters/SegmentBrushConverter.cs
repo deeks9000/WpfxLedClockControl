@@ -6,7 +6,7 @@ using WpfxCustomControls;
 
 internal class SegmentBrushConverter : IValueConverter
 {
-    public static readonly Brush SegmentOffBrush = new SolidColorBrush(Color.FromArgb(32, 150, 150, 150));
+    public static readonly Brush SegmentOffBrush = new SolidColorBrush(Color.FromArgb(32, 150, 150, 150));  // Small Alpha means MORE transparent!
 
     public static readonly Brush SecondsSegmentOnBrush = Brushes.Red;
     public static readonly Brush MinutesSegmentOnBrush = Brushes.DeepSkyBlue;
