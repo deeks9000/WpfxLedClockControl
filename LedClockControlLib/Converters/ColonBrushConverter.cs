@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace WpfxCustomControls;
 
-internal class ColonFillConverter : IValueConverter
+internal class ColonBrushConverter : IValueConverter
 {
     public static readonly Brush ColonOffBrush = new SolidColorBrush(Color.FromArgb(32, 150, 150, 150));   // Small Alpha means MORE transparent!
 
@@ -12,7 +12,7 @@ internal class ColonFillConverter : IValueConverter
 
     public static readonly Brush MinutesColonOnBrush = Brushes.DeepSkyBlue;
 
-    public static readonly ColonFillConverter Instance = new();
+    public static readonly ColonBrushConverter Instance = new();
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

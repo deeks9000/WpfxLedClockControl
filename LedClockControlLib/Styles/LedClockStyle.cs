@@ -111,13 +111,13 @@ internal static class LedClockStyle
             setters: [
                 SetterX(Rectangle.EffectProperty, MultiBindingX(mb => {
                     mb.Bindings.Add(BindingX(b => {
-                        b.Path = new PropertyPath(nameof(LedClockControl.IsGlowEffectEnabled));
-                        b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
+                        b.Path = PropertyPathX(nameof(LedClockControl.IsGlowEffectEnabled));
+                        b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
                     }));
 
                     mb.Bindings.Add(BindingX(b => {
-                        b.Path = new PropertyPath(nameof(LedClockControl.Timestamp));
-                        b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
+                        b.Path = PropertyPathX(nameof(LedClockControl.LedDigits));
+                        b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
                     }));
 
                     mb.Converter = SegmentEffectConverter.Instance;
@@ -131,9 +131,9 @@ internal static class LedClockStyle
                 SetterX(Rectangle.SnapsToDevicePixelsProperty, true),
 
                 SetterX(Rectangle.FillProperty, BindingX(b => {
-                    b.Path = new PropertyPath(nameof(LedClockControl.Timestamp));
-                    b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
-                    b.Converter = SegmentFillConverter.Instance;
+                    b.Path = PropertyPathX(nameof(LedClockControl.LedDigits));
+                    b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
+                    b.Converter = SegmentBrushConverter.Instance;
                     b.ConverterParameter = segmentModel;
                 }))
             ]
@@ -156,15 +156,15 @@ internal static class LedClockStyle
             setters: [
                 SetterX(Rectangle.EffectProperty, MultiBindingX(mb => {
                     mb.Bindings.Add(BindingX(b => {
-                        b.Path = new PropertyPath(nameof(LedClockControl.IsGlowEffectEnabled));
-                        b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
+                        b.Path = PropertyPathX(nameof(LedClockControl.IsGlowEffectEnabled));
+                        b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
                     }));
 
                     mb.Bindings.Add(BindingX(b => {
                         b.Path = isSeconds
-                            ? new PropertyPath(nameof(LedClockControl.SecondsColonActive))
-                            : new PropertyPath(nameof(LedClockControl.MinutesColonActive));
-                        b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
+                            ? PropertyPathX(nameof(LedClockControl.SecondsColonActive))
+                            : PropertyPathX(nameof(LedClockControl.MinutesColonActive));
+                        b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
                     }));
 
                     mb.Converter = ColonEffectConverter.Instance;
@@ -179,10 +179,10 @@ internal static class LedClockStyle
                
                 SetterX(Rectangle.FillProperty, BindingX(b => {
                     b.Path = isSeconds
-                        ? new PropertyPath(nameof(LedClockControl.SecondsColonActive))
-                        : new PropertyPath(nameof(LedClockControl.MinutesColonActive));
-                    b.RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent);
-                    b.Converter = ColonFillConverter.Instance;
+                        ? PropertyPathX(nameof(LedClockControl.SecondsColonActive))
+                        : PropertyPathX(nameof(LedClockControl.MinutesColonActive));
+                    b.RelativeSource = RelativeSourceX(RelativeSourceMode.TemplatedParent);
+                    b.Converter = ColonBrushConverter.Instance;
                     b.ConverterParameter = isSeconds;
                 }))
             ]

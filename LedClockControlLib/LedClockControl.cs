@@ -1,13 +1,18 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace WpfxCustomControls;
 
-public class LedClockControl : Control
+public class LedClockControl : Control, INotifyPropertyChanged
 {
     private readonly DispatcherTimer _timer = new DispatcherTimer();
     private readonly DispatcherTimer _flashTimer = new DispatcherTimer();
+    private byte[] _ledDigits = new byte[6];
+    private bool _secondsColonActive = false;
+    private bool _minutesColonActive = false;
 
     public static Style DefaultStyle { get; }
 
@@ -37,6 +42,16 @@ public class LedClockControl : Control
     private void Timer_Tick(object? sender, EventArgs e)
     {
         Timestamp = DateTime.Now;
+
+        //----------------------------------------------
+        // Computation
+
+        LedDigitsComputer.UpdateLedDigits(Timestamp, _ledDigits);
+
+        OnPropertyChanged(nameof(LedDigits));
+
+        //----------------------------------------------
+        // Scheduling
 
         int phaseOffsetMs = Timestamp.Millisecond;
 
@@ -123,22 +138,7 @@ public class LedClockControl : Control
         new PropertyMetadata(false)
     );
 
-    public static readonly DependencyProperty SecondsColonActiveProperty = DependencyProperty.Register(
-        nameof(SecondsColonActive),
-        typeof(bool),
-        typeof(LedClockControl),
-        new PropertyMetadata(true)
-    );
-
-    public static readonly DependencyProperty MinutesColonActiveProperty = DependencyProperty.Register(
-        nameof(MinutesColonActive),
-        typeof(bool),
-        typeof(LedClockControl),
-        new PropertyMetadata(true)
-    );
-
-
-    // --- CLR Properties ---
+    // --- DP Wrapper CLR Properties ---
 
     public DateTime Timestamp
     {
@@ -164,18 +164,33 @@ public class LedClockControl : Control
         set => SetValue(IsGlowEffectEnabledProperty, value);
     }
 
+    // --- Observable CLR Properties ---
+
+    public byte[] LedDigits => _ledDigits;
+
     public bool SecondsColonActive
     {
-        get => (bool)GetValue(SecondsColonActiveProperty);
-        private set => SetValue(SecondsColonActiveProperty, value);
+        get => _secondsColonActive;
+
+        private set  
+        {
+            _secondsColonActive = value;
+
+            OnPropertyChanged(nameof(SecondsColonActive));
+        }
     }
 
     public bool MinutesColonActive
     {
-        get => (bool)GetValue(MinutesColonActiveProperty);
-        private set => SetValue(MinutesColonActiveProperty, value);
-    }
+        get => _minutesColonActive;
 
+        private set
+        {
+            _minutesColonActive = value;
+
+            OnPropertyChanged(nameof(MinutesColonActive));
+        }
+    }
 
     //------------------------------------------------------------------------------
     // Events
@@ -213,5 +228,12 @@ public class LedClockControl : Control
         {
             RemoveHandler(TimestampChangedEvent, value);
         }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

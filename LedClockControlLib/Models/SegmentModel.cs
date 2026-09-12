@@ -2,59 +2,27 @@
 
 internal sealed class SegmentModel
 {
-    // 5 x 9 seven-segment layout:
-    //
-    //  AAA
-    // F   B
-    // F   B
-    // F   B
-    //  GGG
-    // E   C
-    // E   C
-    // E   C
-    //  DDD
-
-    private static readonly string[] Decoder = [
-        "ABCDEF",   // 0
-        "BC",       // 1
-        "ABDEG",    // 2
-        "ABCDG",    // 3
-        "BCFG",     // 4
-        "ACDFG",    // 5
-        "ACDEFG",   // 6
-        "ABC",      // 7
-        "ABCDEFG",  // 8
-        "ABCDFG"    // 9
-    ];
-
     public SegmentModel(DigitUnit unit, LedSegment segment)
     {
         Unit = unit;
-        Segment = segment;
+        SegmentBitMask = GetSegmentBitMask(segment);
     }
 
-    private DigitUnit Unit { get; }
+    public DigitUnit Unit { get; }
 
-    private LedSegment Segment { get; }
+    public byte SegmentBitMask { get; }
 
-    public bool IsSegmentLit(DateTime timestamp)
+    private byte GetSegmentBitMask(LedSegment segment) => segment switch
     {
-        int digit = Unit switch
-        {
-            DigitUnit.OneSeconds => timestamp.Second % 10,
-            DigitUnit.TenSeconds => timestamp.Second / 10,
-
-            DigitUnit.OneMinutes => timestamp.Minute % 10,
-            DigitUnit.TenMinutes => timestamp.Minute / 10,
-
-            DigitUnit.OneHours => timestamp.Hour % 10,
-            DigitUnit.TenHours => timestamp.Hour / 10,
-
-            _ => throw new ArgumentOutOfRangeException(nameof(Unit), Unit, null)
-        };
-
-        return Decoder[digit].Contains(Segment.ToString());
-    }
+        LedSegment.A => 1 << 0,
+        LedSegment.B => 1 << 1,
+        LedSegment.C => 1 << 2,
+        LedSegment.D => 1 << 3,
+        LedSegment.E => 1 << 4,
+        LedSegment.F => 1 << 5,
+        LedSegment.G => 1 << 6,
+        _ => throw new ArgumentOutOfRangeException(nameof(segment))
+    };
 
     public bool IsSeconds()
     {
